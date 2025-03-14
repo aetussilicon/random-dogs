@@ -39,6 +39,10 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
+tasks.named('bootJar') {
+	mainClass = 'br.com.projetos.randomdog.RandomdogApplication.java'
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
 }
