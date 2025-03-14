@@ -1,0 +1,39 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    depends_on:
+      randomdogs-db:
+        condition: service_healthy
+    ports:
+      - "8005:8080"
+    networks:
+      - randondogs-network
+
+  randomdogs-db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: foxtrot
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 92duwt96
+    ports:
+      - "5434:5432"
+    volumes:
+      - db-randomdogs-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U root -d foxtrot" ]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 5s
+    networks:
+      - randondogs-network
+
+networks:
+  - randondogs-network:
+volumes:
+  db-randomdogs-data:
+
