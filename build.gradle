@@ -40,7 +40,7 @@ dependencies {
 }
 
 tasks.named('bootJar') {
-	mainClass = 'br.com.projetos.randomdog.RandomdogApplication.java'
+	mainClass = 'br.com.projetos.randomdog.RandomdogApplication'
 }
 
 tasks.named('test') {
