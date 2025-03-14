@@ -1,4 +1,4 @@
-FROM gradle:8.12.0-jdk23-alpine AS build
+FROM gradle:8.12.0-jdk21-alpine AS build
 WORKDIR /app
 COPY build.gradle settings.gradle gradlew ./
 COPY gradle ./gradle
@@ -10,9 +10,9 @@ COPY src/main/resources/db/migration .
 
 RUN chmod +x gradlew
 
-RUN ./gradlew clean build -x test --no-daemon
+RUN ./gradlew clean build
 
-FROM eclipse-temurin:23-jdk-alpine
+FROM eclipse-temurin:21-jdk-alpine
 WORKDIR /app
 
 COPY --from=build /app/build/libs/*.jar app.jar
