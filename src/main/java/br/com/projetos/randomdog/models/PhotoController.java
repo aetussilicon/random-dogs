@@ -4,6 +4,7 @@ import br.com.projetos.randomdog.PhotoRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.tika.Tika;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import java.util.Base64;
 public class PhotoController {
     private final PhotoRepository photoRepository;
 
+    @CrossOrigin("*")
     @PostMapping("new")
     public HttpStatus addPhoto(MultipartFile photo) {
         try {
@@ -32,6 +34,7 @@ public class PhotoController {
         return HttpStatus.CREATED;
     }
 
+    @CrossOrigin("*")
     @GetMapping
     public PhotoDto getPhoto() {
         Tika tika = new Tika();
